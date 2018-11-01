@@ -12,10 +12,14 @@
     "good-file": "6.0.1",
     "good-squeeze": "5.1.0",
     "hapi": "17.6.0",
-    "mongoose": "5.3.2"
+    "joi": "14.0.1",
+    "mongoose": "5.3.7",
+    "nodemailer": "4.6.8"
   },
   "devDependencies": {
-    "eslint": "5.6.1"
+    "chai": "4.2.0",
+    "eslint": "5.8.0",
+    "mocha": "5.2.0"
   },
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js **/*.js --ignore-pattern node_modules/ $XTRA_PARAMS ; exit 0"
