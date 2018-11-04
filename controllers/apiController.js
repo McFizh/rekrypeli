@@ -4,14 +4,6 @@ const Boom = require('boom');
 
 async function scoreHandler(request, h) {
 
-    // Validate parameters
-    if(
-        !request.payload || !request.payload.name || 
-        !request.payload.time || !request.payload.code
-    ) {
-        return Boom.badRequest('Missing parameters?');
-    }
-
     // Store results to mongo
     let score = new mongo.scoreModel({
         name: request.payload.name,

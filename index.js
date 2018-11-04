@@ -22,6 +22,9 @@ const init = async function() {
         port: 8080
     });
 
+    // Register basic auth module
+    await server.register( require('hapi-auth-bearer-token') );
+
     // Register routes
     routes.register(server);
 
