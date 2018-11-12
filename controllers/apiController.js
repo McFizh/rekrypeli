@@ -4,12 +4,24 @@ const Boom = require('boom');
 
 async function scoreHandler(request, h) {
 
-    // Store results to mongo
-    let score = new mongo.scoreModel({
-        name: request.payload.name,
+    //
+    var formData = {
+        firstname: request.payload.firstname,
+        lastname: request.payload.lastname,
+        email: request.payload.email,
+
+        intrest1: request.payload.intrest1,
+        intrest2: request.payload.intrest2,
+        intrest3: request.payload.intrest3,
+        intrest4: request.payload.intrest4,
+
+        permission: request.payload.permission,
         code: request.payload.code,
-        timespent: request.payload.time
-    });
+        time: request.payload.time
+    };
+
+    // Store results to mongo
+    var score = new mongo.scoreModel(formData);
 
     try {
         await score.save();
@@ -18,11 +30,7 @@ async function scoreHandler(request, h) {
     }
 
     // Send results
-    const result = mailer.sendResults(
-        request.payload.name,
-        request.payload.time,
-        request.payload.code
-    );
+    const result = mailer.sendResults(formData);
 
     if(!result) {
         return h.response("MAILERFAILURE").code(500);
