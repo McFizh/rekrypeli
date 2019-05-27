@@ -26,17 +26,17 @@ async function scoreHandler(request, h) {
     try {
         await score.save();
     } catch(err) {
-        return h.response("DBFAILURE").code(500);
+        return h.response('DBFAILURE').code(500);
     }
 
     // Send results
     const result = mailer.sendResults(formData);
 
     if(!result) {
-        return h.response("MAILERFAILURE").code(500);
+        return h.response('MAILERFAILURE').code(500);
     }
 
-    return h.response("OK").code(201);
+    return h.response('OK').code(201);
 }
 
 function scoreRetreiver(request, h) {
