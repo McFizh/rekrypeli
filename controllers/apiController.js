@@ -1,6 +1,6 @@
 const mailer = require('../lib/emailer');
 const mongo = require('../lib/database');
-const Boom = require('boom');
+const Boom = require('@hapi/boom');
 
 async function scoreHandler(request, h) {
 

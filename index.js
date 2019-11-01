@@ -1,7 +1,7 @@
 'use strict';
 
-const Hapi = require('hapi');
-const Good = require('good');
+const Hapi = require('@hapi/hapi');
+const Good = require('@hapi/good');
 
 const mongo = require('./lib/database');
 const routes = require('./lib/routes');
