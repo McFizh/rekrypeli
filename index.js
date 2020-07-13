@@ -1,18 +1,16 @@
 'use strict';
-
 const Hapi = require('@hapi/hapi');
-const Good = require('@hapi/good');
+
+require('dotenv').config();
 
 const mongo = require('./lib/database');
 const routes = require('./lib/routes');
 const mailer = require('./lib/emailer');
 
-require('dotenv').config();
-
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// 
+//
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-const init = async function() {
+const init = async () => {
 
     // Connect to database
     await mongo.connect();
@@ -30,8 +28,8 @@ const init = async function() {
 
     // Start the server
     await server.start();
-    
-    return server; 
+
+    return server;
 };
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

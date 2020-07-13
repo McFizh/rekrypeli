@@ -1,14 +1,19 @@
-FROM node:10.15
+FROM node:12
 EXPOSE 8080
-
-RUN apt-get update ; apt-get install -y unzip
-
 WORKDIR /services
 
-RUN wget --quiet https://github.com/McFizh/rekrypeli_backend/archive/master.zip ;\
-    unzip master.zip ;\
-    cd rekrypeli_backend-master; mv * .. ; mv .[a-z]* .. ; cd .. ; rmdir rekrypeli_backend-master
+ENV MONGODB_URL=""
+ENV APIKEY=""
+ENV SMTP_UNAME=""
+ENV SMTP_PASS=""
+ENV SMTP_SRC="me@me.com"
+ENV SMTP_DST="you@you.com"
+ENV SMTP_SUBJECT="You've got mail"
+ENV SMTP_BODY="(%fname% , %lname%, %email%) (1: %i1%, 2: %i2%, 3: %i3%, 4: %i4%, p: %pe%) (%time%): %code%"
+
+COPY controllers controllers
+COPY lib lib
+COPY *.js package* README.md ./
 
 RUN npm ci
-
-CMD node index.js
+ENTRYPOINT ["npm", "run", "start"]

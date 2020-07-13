@@ -1,11 +1,8 @@
 const mailer = require('../lib/emailer');
 const mongo = require('../lib/database');
-const Boom = require('@hapi/boom');
 
-async function scoreHandler(request, h) {
-
-    //
-    var formData = {
+const scoreHandler = async (request, h) => {
+    const formData = {
         firstname: request.payload.firstname,
         lastname: request.payload.lastname,
         email: request.payload.email,
@@ -21,12 +18,14 @@ async function scoreHandler(request, h) {
     };
 
     // Store results to mongo
-    var score = new mongo.scoreModel(formData);
+    if(mongo.databaseEnabled) {
+        const score = new mongo.scoreModel(formData);
 
-    try {
-        await score.save();
-    } catch(err) {
-        return h.response('DBFAILURE').code(500);
+        try {
+            await score.save();
+        } catch(err) {
+            return h.response('DBFAILURE').code(500);
+        }
     }
 
     // Send results
@@ -37,16 +36,13 @@ async function scoreHandler(request, h) {
     }
 
     return h.response('OK').code(201);
-}
-
-function scoreRetreiver(request, h) {
-    let scores = mongo.scoreModel.find();
-
-    return scores;
-}
-
-module.exports = {
-    scoreHandler: scoreHandler,
-    scoreRetreiver: scoreRetreiver
 };
 
+const scoreRetreiver = async () => {
+    return mongo.databaseEnabled ? await mongo.scoreModel.find() : [];
+};
+
+module.exports = {
+    scoreHandler,
+    scoreRetreiver,
+};

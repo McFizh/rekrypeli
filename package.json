@@ -6,23 +6,25 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "8.0.1",
+    "@hapi/boom": "^9.1.0",
+    "@hapi/good": "^9.0.0",
+    "@hapi/good-squeeze": "^6.0.0",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/joi": "^17.1.1",
     "dotenv": "^8.0.0",
-    "@hapi/good": "^8.2.4",
     "good-file": "6.0.1",
-    "@hapi/good-squeeze": "^5.2.1",
-    "@hapi/hapi": "^18.4.0",
-    "hapi-auth-bearer-token": "^6.2.1",
-    "joi": "14.3.1",
-    "mongoose": "^5.7.7",
-    "nodemailer": "^6.2.1"
+    "hapi-auth-bearer-token": "^6.1.6",
+    "mongoose": "^5.9.23",
+    "nodemailer": "^6.4.10"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "eslint": "^5.16.0",
-    "mocha": "^6.1.4"
+    "eslint": "^7.4.0",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4"
   },
   "scripts": {
-    "lint": "eslint **/*.js --ignore-pattern node_modules/ $XTRA_PARAMS ; exit 0"
+    "lint": "eslint .",
+    "watch": "nodemon",
+    "start": "node index.js"
   }
 }
