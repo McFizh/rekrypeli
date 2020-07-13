@@ -12,6 +12,10 @@ docker build -t backend:latest .
 
 docker run -p 8080:8080 backend:latest
 
+Note. you can also use prebuild image:
+
+https://hub.docker.com/r/mcfizh/rekrypeli_backend
+
 ## Local installation
 
 Copy .env.example file to .env file, change settings and start with:
