@@ -17,7 +17,7 @@ const init = async () => {
 
     // Initialize hapi server
     const server = new Hapi.Server({
-        port: 8080
+        port: process.env.PORT || 8080
     });
 
     // Register basic auth module

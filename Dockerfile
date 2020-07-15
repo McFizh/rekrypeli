@@ -1,19 +1,21 @@
-FROM node:12
+FROM node:12-alpine
 EXPOSE 8080
+USER node
 WORKDIR /services
 
-ENV MONGODB_URL=""
-ENV APIKEY=""
-ENV SMTP_UNAME=""
-ENV SMTP_PASS=""
-ENV SMTP_SRC="me@me.com"
-ENV SMTP_DST="you@you.com"
-ENV SMTP_SUBJECT="You've got mail"
-ENV SMTP_BODY="(%fname% , %lname%, %email%) (1: %i1%, 2: %i2%, 3: %i3%, 4: %i4%, p: %pe%) (%time%): %code%"
+ENV MONGODB_URL="" \
+    PORT="8080" \
+    APIKEY="" \
+    SMTP_UNAME="" \
+    SMTP_PASS="" \
+    SMTP_SRC="me@me.com" \
+    SMTP_DST="you@you.com" \
+    SMTP_SUBJECT="You've got mail" \
+    SMTP_BODY="(%fname% , %lname%, %email%) (1: %i1%, 2: %i2%, 3: %i3%, 4: %i4%, p: %pe%) (%time%): %code%"
 
 COPY controllers controllers
 COPY lib lib
 COPY *.js package* README.md ./
 
-RUN npm ci
-ENTRYPOINT ["npm", "run", "start"]
+RUN npm ci ; npm cache clean --force
+ENTRYPOINT ["node", "index.js"]
